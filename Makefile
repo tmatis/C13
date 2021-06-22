@@ -6,7 +6,7 @@
 #    By: tmatis <tmatis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/08 16:38:19 by tmatis            #+#    #+#              #
-#    Updated: 2021/06/22 13:01:59 by tmatis           ###   ########.fr        #
+#    Updated: 2021/06/22 13:24:09 by tmatis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ DATE	= 25/03/2021
 #                                 PROGRAM'S SRCS                               #
 ################################################################################
 
-SRCS		= 	ex00/btree_create_node.c \
+SRCS		= 	srcs/assert/assert.c \
+				srcs/assert/assert_utils.c \
+				ex00/btree_create_node.c \
 				ex01/btree_apply_prefix.c \
 				ex02/btree_apply_infix.c \
 				ex03/btree_apply_suffix.c \
