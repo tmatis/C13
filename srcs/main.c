@@ -6,7 +6,7 @@
 /*   By: tmatis <tmatis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 12:35:25 by tmatis            #+#    #+#             */
-/*   Updated: 2021/06/23 13:23:21 by tmatis           ###   ########.fr       */
+/*   Updated: 2021/06/23 19:00:22 by tmatis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,44 @@ void	test_ex05(t_tests *tester)
 	ft_assert(elem == 0, "ex05: not found", tester);
 	elem = btree_search_item(root, "f", (int (*)(void *, void *))strcmp);
 	ft_assert_strcmp(elem, "f", "ex05: search test", tester);
+	free_tree(root);
+}
 
+void	test_ex06(t_tests *tester)
+{
+	t_btree	*root = generate_tree();
+
+	ft_assert_cmp(btree_level_count(root), 3, "ex06 level", tester);
+	btree_insert_data(&root, "z", (int (*)(void *, void *))strcmp);
+	ft_assert_cmp(btree_level_count(root), 3, "ex06 level", tester);
+	btree_insert_data(&root, "w", (int (*)(void *, void *))strcmp);
+	ft_assert_cmp(btree_level_count(root), 4, "ex06 level", tester);
+	free_tree(root);
+}
+
+void	draw_tree(void *item, int current_level, int is_first_elem)
+{
+	dprintf(STDOUT_FILENO, ";%i:%s:%i", current_level, (char *)item, is_first_elem);
+}
+
+void	test_ex07(t_tests *tester)
+{
+	int		backup_fd;
+	int		read_fd;
+	char	buff[200];
+	int		read_size;
+	t_btree *root = generate_tree();
+
+	read_fd = redirect_out(&backup_fd);
+	btree_apply_by_level(root, draw_tree);
+	read_size = read(read_fd, buff, sizeof(buff));
+	close(read_fd);
+	close(STDOUT_FILENO);
+	dup2(backup_fd, STDOUT_FILENO);
+	close(backup_fd);
+	buff[read_size] = 0;
+	ft_assert_strcmp(buff, ";0:e:1;1:c:0;1:f:0;2:a:0", "ex07 Check output", tester);
+	free_tree(root);
 }
 
 int		main(void)
@@ -167,5 +204,7 @@ int		main(void)
 	test_ex03(&tester);
 	test_ex04(&tester);
 	test_ex05(&tester);
+	test_ex06(&tester);
+	test_ex07(&tester);
 	tests_result(&tester);
 }
