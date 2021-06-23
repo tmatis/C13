@@ -6,7 +6,7 @@
 /*   By: tmatis <tmatis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 12:35:25 by tmatis            #+#    #+#             */
-/*   Updated: 2021/06/22 20:49:02 by tmatis           ###   ########.fr       */
+/*   Updated: 2021/06/23 13:23:21 by tmatis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,20 @@ void	test_ex04(t_tests *tester)
 	free_tree(root);
 }
 
+void	test_ex05(t_tests *tester)
+{
+	t_btree	*root = generate_tree();
+	void	*elem;
+
+	elem = btree_search_item(root, "e", (int (*)(void *, void *))strcmp);
+	ft_assert_strcmp(elem, "e", "ex05: search test", tester);
+	elem = btree_search_item(root, "z", (int (*)(void *, void *))strcmp);
+	ft_assert(elem == 0, "ex05: not found", tester);
+	elem = btree_search_item(root, "f", (int (*)(void *, void *))strcmp);
+	ft_assert_strcmp(elem, "f", "ex05: search test", tester);
+
+}
+
 int		main(void)
 {
 	t_tests tester = init_tester("C13 TEST", 3);
@@ -152,5 +166,6 @@ int		main(void)
 	test_ex02(&tester);
 	test_ex03(&tester);
 	test_ex04(&tester);
+	test_ex05(&tester);
 	tests_result(&tester);
 }

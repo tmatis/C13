@@ -6,7 +6,7 @@
 #    By: tmatis <tmatis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/08 16:38:19 by tmatis            #+#    #+#              #
-#    Updated: 2021/06/22 13:24:09 by tmatis           ###   ########.fr        #
+#    Updated: 2021/06/23 13:15:39 by tmatis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,8 @@ SRCS		= 	srcs/assert/assert.c \
 				ex02/btree_apply_infix.c \
 				ex03/btree_apply_suffix.c \
 				ex04/btree_insert_data.c \
+				ex05/btree_search_item.c \
+
 
 MAIN		= srcs/main.c
 
